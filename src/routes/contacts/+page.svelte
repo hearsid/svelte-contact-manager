@@ -7,24 +7,16 @@
   let selectedContact: IContact;
   let total_contacts: number;
 
+  const no_of_contacts = $page.url.searchParams.get('no_of_contacts');
 
 
-const no_of_contacts = $page.url.searchParams.get('no_of_contacts')
-
-
-        let total_contacts = +param['']; // toInt
-        this.total_contacts = Number(total_contacts);
-        this.contacts = this.contactService.generateContacts(this.total_contacts);
+        total_contacts = +param['']; // toInt
+        total_contacts = Number(total_contacts);
+        contacts = this.contactService.generateContacts(this.total_contacts);
         this.getContacts(this.total_contacts);
-      });
-  }
 
-  ngOnDestroy() {
-    // prevent memory leak by unsubscribing
-    this.subscription.unsubscribe();
-  }
 
-  getContacts(total: number): void {
+  function getContacts(total: number): void {
     //  this.contactService.getContacts().then(contacts => { this.contacts = contacts });
     const contactCount = total || 10;
     this.contactService.getContactList(contactCount)
@@ -38,23 +30,24 @@ const no_of_contacts = $page.url.searchParams.get('no_of_contacts')
       );
   }
 
-  onSelect(contact: IContact): void {
+  function onSelect(contact: IContact): void {
     this.selectedContact = contact;
   }
 
-  delete(index: number): void {
+  function delete(index: number): void {
     this.contactService.deleteContact(index);
     //    this.getContacts();
   }
 
-  addContact(): void {
+  function addContact(): void {
     // set active component to null to determine edit/add
     this.contactService.activeContact = new IContact();
     this.router.navigate(['/newContact']);
   }
 </script>
 
-<h2 class="page-header text-center">{{title}} ({{contacts?.length?.toLocaleString()}})</h2>
+<h2 class="page-header text-center">
+  {title} ({contacts?.length?.toLocaleString()})</h2>
 <!-- <p class="text-center">
     <a (click)="addContact()" class="btn btn-lg btn-outline" >Add Contact</a>
 </p> -->
