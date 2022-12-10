@@ -2,9 +2,11 @@
   import type { IContact } from "$lib/contact.type";
   import { page } from '$app/stores';
   import Contact from './Contact.svelte';
+  /** @type {import('./$types').PageData} */
+  export let data;
 
   let title = 'Contacts';
-  let contacts: IContact[] = [];
+  let contacts: IContact[] = [data[0]] || [];
   let selectedContact: IContact;
   let total_contacts: number;
 
