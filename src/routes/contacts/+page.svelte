@@ -6,7 +6,7 @@
   export let data;
 
   let title = 'Contacts';
-  let contacts: IContact[] = [data[0]] || [];
+  let contacts: IContact[] = data.contacts || [];
   let selectedContact: IContact;
   let total_contacts: number;
 
@@ -59,8 +59,8 @@
 <div class="media-list contacts-container">
   {#each contacts as contact, i}
       <Contact
-      contact="contact"
-      index="i"
+      contact={contact}
+      index={i}
       class="my-repeat-animation contact media"
       on:remove={deleteContact}
       ()="delete($event)"

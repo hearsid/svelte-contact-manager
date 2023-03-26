@@ -14,9 +14,10 @@
 
 <div class={$$props.class}>
 	<div class="thumbnail">
+		<!-- svelte-ignore a11y-img-redundant-alt -->
 		<img
 			class="media-object contact-image"
-			src="assets/img/faces/{contact.id || contact.imageId}.jpg"
+			src="images/{contact.id || contact.imageId}.jpg"
             alt="contact image"
 		/>
 	</div>

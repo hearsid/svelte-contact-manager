@@ -1,26 +1,17 @@
 import { error } from '@sveltejs/kit';
 import type { IContact } from "$lib/contact.type";
+import { CONTACTS } from '$lib/constants/contacts.constant';
+import { Utilities } from '$lib/functions/Util';
+import { page } from '$app/stores';
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ params }) {
+export async function load({ url }) {
   const get = await new Promise((resolve, reject) => {
-    const contacts: IContacts[] = [
-        {
-            id: 1,
-            name: 'Tom',
-            tel: '92348712432',
-            email: 'hearsid@gmail.com',
-            imageId: 1
-        }, 
-        {
-          id: 2,
-          name: 'Tom',
-          tel: '92348712432',
-          email: 'hearsid@gmail.com',
-          imageId: 1
-      }
-    ]
-    resolve(contacts);
+    const count = url.searchParams.get('no_of_contacts') 
+    const no_of_contacts = count || 10;
+    let contactsList: IContact[] = CONTACTS;
+    contactsList = Utilities.generateContacts(Number(no_of_contacts), contactsList);
+    resolve({ contacts: contactsList });
   });
  
   if (get) {
