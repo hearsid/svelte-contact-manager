@@ -1,0 +1,27 @@
+{
+    "builds": [
+      {
+        "src": "src/functions/*.js",
+        "use": "@vercel/node@1.9.3"
+      },
+      {
+        "src": "src/app.js",
+        "use": "@sveltejs/adapter-static",
+        "config": {
+          "npm": {
+            "username": "hearsid",
+            "email": "hearsid@gmail.com",
+            "registry": "https://registry.npmjs.org/"
+          }
+        }
+      }
+    ],
+    "routes": [
+      { "handle": "filesystem" },
+      { "src": "/.*", "dest": "/index.js" }
+    ],
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }
+  
